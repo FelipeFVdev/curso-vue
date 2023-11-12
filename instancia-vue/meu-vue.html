@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      {{ nome }} {{ sobrenome }}
+      <button @click="alterar">Alterar</button>
+    </div>
+  </body>
+</html>
+
+<script>
+  function MeuVue(params) {
+    this.$el = document.querySelector(params.el);
+    this.$data = params.data;
+
+    for (let atr in this.$data) {
+      Object.defineProperty(this, atr, {
+        get: () => {
+          return this.$data[atr];
+        },
+        set: (value) => {
+          //...
+          this.$data[atr] = value;
+          //...
+        },
+      });
+    }
+  }
+
+  const vm = new MeuVue({
+    el: "#app",
+    data() {
+      return {
+        nome: "Maria",
+        sobrenome: "Silva",
+      };
+    },
+  });
+
+  console.log(vm.nome);
+  console.log(vm.$data.nome);
+</script>
